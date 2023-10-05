@@ -1,0 +1,61 @@
+{% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
+
+{% block layout_footer_navigation %}
+    <div
+            id="footerColumns"
+            class="row footer-columns"
+            {# @deprecated tag:v6.6.0 - Registering plugin on selector "data-collapse-footer" is deprecated. Use "data-collapse-footer-columns" instead #}
+            {% if feature('v6.6.0.0') %}
+                data-collapse-footer-columns="true"
+            {% else %}
+                data-collapse-footer="true"
+            {% endif %}
+            role="list"
+    >
+        {% block layout_footer_navigation_hotline %}
+            {{ parent() }}
+        {% endblock %}
+
+        {% block layout_footer_navigation_popup_button %}
+            <div class="col-md-4 footer-column js-footer-column">
+                {% block layout_footer_navigation_popup_button_headline %}
+                    <div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger"
+                         id="collapsePopupButtonTitle"
+                         data-bs-target="#collapsePopupButton"
+                         aria-expanded="true"
+                         aria-controls="collapsePopupButton"
+                         role="listitem">
+                        <span>Popup Button</span>
+                        {% block layout_footer_navigation_pupup_button_icons %}
+                            <div class="footer-column-toggle">
+                                <span class="footer-plus-icon">
+                                    {% sw_icon 'plus' %}
+                                </span>
+                                <span class="footer-minus-icon">
+                                    {% sw_icon 'minus' %}
+                                </span>
+                            </div>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+
+                {% block layout_footer_navigation_popup_button_content %}
+                    <div id="collapsePopupButton"
+                         class="footer-column-content collapse js-footer-column-content footer-contact"
+                         aria-labelledby="collapsePopupButtonTitle">
+                        <div class="footer-column-content-inner">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#popupModal">
+                                Popup erneut anzeigen
+                            </button>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block layout_footer_navigation_columns %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+{% endblock %}
